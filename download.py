@@ -4,22 +4,23 @@ from pprint import pprint
 import os, time, sys
 
 #Imformation of API key
-key = "287ae990df38ef7f62319d159ac1b9a8"
-secret = "261a31582256c41d"
+key = ""
+secret = ""
 wait_time = 1
 
 #save directory
-searchname1 = sys.argv[1]
-searchname2 = sys.argv[2]
-searchname3 = sys.argv[3]
-
 #make new directory for image save
-savedir = "./" + "images"
+savedir_root = "./" + "images"
+image_name = []
 
+for i in range(len(sys.argv) - 1):
+ 
+    savedir_path = os.path.join(savedir_root, sys.argv[i + 1])
+    os.mkdir(savedir_path)
+    image_name.append(sys.argv[i + 1])
 
-
-
-
+'''
+#get flickr data as json
 flickr = FlickrAPI(key, secret, format='parsed-json')
 result = flickr.photos.search(
     text = searchname,
@@ -45,5 +46,5 @@ for i, photo in enumerate(photos['photo']):
     urlretrieve(url_q, filepath)
     # 1se sleep for server stress
     time.sleep(wait_time)
-
+'''
 
