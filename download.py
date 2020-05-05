@@ -9,8 +9,16 @@ secret = "261a31582256c41d"
 wait_time = 1
 
 #save directory
-searchname = sys.argv[1]
-savedir = "./" + searchname
+searchname1 = sys.argv[1]
+searchname2 = sys.argv[2]
+searchname3 = sys.argv[3]
+
+#make new directory for image save
+savedir = "./" + "images"
+
+
+
+
 
 flickr = FlickrAPI(key, secret, format='parsed-json')
 result = flickr.photos.search(
