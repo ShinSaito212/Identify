@@ -23,12 +23,11 @@ for i in range(len(sys.argv) - 1):
     os.mkdir(savedir_path)
     image_name.append(sys.argv[i + 1])
 
-
     # get flickr data as json
     flickr = FlickrAPI(key, secret, format='parsed-json')
     result = flickr.photos.search(
         text = image_name[i],
-        per_page = 400,
+        per_page = 100,
         media = 'photos',
         sort = 'relevance',
         safe_search = 1,
@@ -40,7 +39,9 @@ for i in range(len(sys.argv) - 1):
     # check flickrapi json
     # pprint(photos)
 
-    # get photo file 
+    # get photo file
+    print("downloading " + image_name[i] + "...")
+
     for j, photo in enumerate(photos['photo']):
         url_q = photo['url_q']
         filepath = savedir_path + '/' + photo['id'] + '.jpg'
@@ -49,6 +50,9 @@ for i in range(len(sys.argv) - 1):
         if os.path.exists(filepath): continue
         # download photo file
         urlretrieve(url_q, filepath)
-        # 1se sleep for server stress
+        # time sleep for server stress
         time.sleep(wait_time)
+
+print("Finish download images...")
+
 
