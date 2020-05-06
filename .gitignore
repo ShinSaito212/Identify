@@ -1,8 +1,9 @@
 ## gitignore setup
 #
-# text flie or swp file
-*.swp
+# text flie
 *.txt
+# swap file
+*.swp
 
 # jupyter notebook
 *.ipynb
