@@ -4,15 +4,11 @@ from pprint import pprint
 import os, time, sys
 
 # Imformation of API key
-key = ""
-secret = ""
+key = "287ae990df38ef7f62319d159ac1b9a8"
+secret = "261a31582256c41d"
 wait_time = 1
 
-### 関数またはクラス化して汎用性を持たせる
-### argvを引数にもらい，ディレクトリ作成
-### API使用し画像をダウンロード
-### argvの内容をimage_nameとしてreturnする
-
+###
 savedir_root = "./" + "images"
 image_name = []
 

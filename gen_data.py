@@ -1,16 +1,26 @@
 from PIL import Image
-import os, glob
+import os, sys, glob
 import numpy as np
 from sklearn import model_selection
 
-### 引数としてimage_nameう受け取り
-### numpy配列化してsave_data.npyをreturnする
-classes = ["image1", "image2", "image3"]
+### 
+# change directory to images
+os.chdir("images/")
+# get path of images directories
+path = os.getcwd()
+# list of sub directories
+classes = []
+
+for d in os.listdir(path):
+    if os.path.isdir(os.path.join(path, d)):
+        classes.append(d)
+
 num_classes = len(classes)
 # rezie image data to 50 pixels
 image_size = 50
 
 # input image data
+# X : numpy array, Y : class label
 X = []
 Y = []
 
@@ -28,11 +38,14 @@ for index, classlabel in enumerate(classes):
         X.append(data)
         Y.append(index)
 
-
 X = np.array(X)
 Y = np.array(Y)
 
 X_train, X_test, y_train, y_test = model_selection.train_test_split(X, Y)
 xy = (X_train, X_test, y_train, y_test)
+
+os.chdir("../")
+os.chdir("gen/")
 np.save("./save_gendata.npy", xy)
+
 

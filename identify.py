@@ -4,18 +4,30 @@ from keras.layers import Conv2D, MaxPooling2D
 from keras.layers import Activation, Dropout, Flatten, Dense
 from keras.utils import np_utils
 import numpy as np
+import os
 
-classes = ["image1", "image2", "image3"]
+# change directory to images
+os.chdir("images/")
+# get path of images directories
+path = os.getcwd()
+# list of sub directories
+classes = []
+
+for d in os.listdir(path):
+    if os.path.isdir(os.path.join(path, d)):
+        classes.append(d)
+
 num_classes = len(classes)
-# rezie image data to 50 pixels
-image_size = 50
+
+# change directory to identify
+os.chdir("../")
 
 # define main function
 def main():
 
-    X_train, X_test, y_train, y_test = np.load("./save_gendata.npy")
+    X_train, X_test, y_train, y_test = np.load("./gen/save_gendata.npy")
 
-    # dara normalization
+    # data normalization
     X_train = X_train.astype("float") / 256
     X_test = X_test.astype("float") / 256
     y_train = np_utils.to_categorical(y_train, num_classes)
@@ -56,7 +68,7 @@ def model_train(X, y):
     model.fit(X, y, batch_size=32, epochs=25)
 
     #save model
-    model.save('./identify_cnn.h5')
+    model.save('./components/identify_cnn.h5')
 
     return model
 
