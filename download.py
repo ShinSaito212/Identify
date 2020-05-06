@@ -3,24 +3,28 @@ from urllib.request import urlretrieve
 from pprint import pprint
 import os, time, sys
 
-#Imformation of API key
+# Imformation of API key
 key = ""
 secret = ""
 wait_time = 1
 
-###
+### 関数またはクラス化して汎用性を持たせる
+### argvを引数にもらい，ディレクトリ作成
+### API使用し画像をダウンロード
+### argvの内容をimage_nameとしてreturnする
+
 savedir_root = "./" + "images"
 image_name = []
 
 for i in range(len(sys.argv) - 1):
  
-    #make new directory for image save
+    # make new directory for image save
     savedir_path = os.path.join(savedir_root, sys.argv[i + 1])
     os.mkdir(savedir_path)
     image_name.append(sys.argv[i + 1])
 
 
-    #get flickr data as json
+    # get flickr data as json
     flickr = FlickrAPI(key, secret, format='parsed-json')
     result = flickr.photos.search(
         text = image_name[i],
@@ -36,7 +40,7 @@ for i in range(len(sys.argv) - 1):
     # check flickrapi json
     # pprint(photos)
 
-    #get photo file 
+    # get photo file 
     for j, photo in enumerate(photos['photo']):
         url_q = photo['url_q']
         filepath = savedir_path + '/' + photo['id'] + '.jpg'

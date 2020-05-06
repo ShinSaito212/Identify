@@ -3,6 +3,8 @@ import os, glob
 import numpy as np
 from sklearn import model_selection
 
+### 引数としてimage_nameう受け取り
+### numpy配列化してsave_data.npyをreturnする
 classes = ["image1", "image2", "image3"]
 num_classes = len(classes)
 # rezie image data to 50 pixels
