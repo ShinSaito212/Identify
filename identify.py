@@ -6,25 +6,14 @@ from keras.utils import np_utils
 import numpy as np
 import os
 
-# change directory to images
-os.chdir("images/")
-# get path of images directories
-path = os.getcwd()
-# list of sub directories
-classes = []
-
-for d in os.listdir(path):
-    if os.path.isdir(os.path.join(path, d)):
-        classes.append(d)
-
-num_classes = len(classes)
-
-# change directory to identify
-os.chdir("../")
 
 # define main function
 def main():
 
+    # get sub directories name and quantity
+    num_classes = get_num_classes()
+
+    # numpy data loading
     X_train, X_test, y_train, y_test = np.load("./gen/save_gendata.npy")
 
     # data normalization
@@ -37,7 +26,30 @@ def main():
     model_eval(model, X_test, y_test)
 
 
-def model_train(X, y):
+def get_num_classes():
+
+    # change directory to images
+    os.chdir("images/")
+
+    # get path of images directories
+    path = os.getcwd()
+
+    # lsit of sub directories
+    classes =[]
+
+    for d in os.listdir(path):
+        if os.path.isdir(os.path.join(path, d)):
+            classes.append(d)
+
+    num_classes = len(classes)
+
+    # change directory to identify
+    os.chdir("../")
+
+    return num_classes
+
+
+def  model_train(X, y):
 
     model = Sequential()
     model.add(Conv2D(32, (3, 3), padding='same', input_shape=X.shape[1:]))
