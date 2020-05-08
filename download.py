@@ -4,8 +4,8 @@ from pprint import pprint
 import os, time, sys
 
 # Imformation of API key
-key = "287ae990df38ef7f62319d159ac1b9a8"
-secret = "261a31582256c41d"
+key = ""
+secret = ""
 wait_time = 1
 
 ###
