@@ -49,6 +49,6 @@ for i in range(len(sys.argv) - 1):
         # time sleep for server stress
         time.sleep(wait_time)
 
-print("Finish download images...")
+print("Finish download images.")
 
 
